@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/i18n-translator.iml" filepath="$PROJECT_DIR$/.idea/modules/i18n-translator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/i18n-translator_main.iml" filepath="$PROJECT_DIR$/.idea/modules/i18n-translator_main.iml" group="i18n-translator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/i18n-translator_test.iml" filepath="$PROJECT_DIR$/.idea/modules/i18n-translator_test.iml" group="i18n-translator" />
+    </modules>
+  </component>
+</project>
