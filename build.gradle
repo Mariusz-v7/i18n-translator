@@ -31,3 +31,14 @@ dependencies {
     testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.7.RELEASE'
     testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.2.2.RELEASE'
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
