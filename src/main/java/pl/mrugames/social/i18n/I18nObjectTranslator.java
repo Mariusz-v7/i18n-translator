@@ -4,7 +4,10 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class I18nObjectTranslator {
@@ -16,7 +19,7 @@ public class I18nObjectTranslator {
 
     public void translate(Object object) throws IllegalAccessException {
 
-        for (Field field : object.getClass().getDeclaredFields()) {
+        for (Field field : getAllFields(object.getClass(), new LinkedList<>())) {
             boolean accessible = field.isAccessible();
 
             try {
@@ -58,5 +61,16 @@ public class I18nObjectTranslator {
 
     public String translateString(String str) {
         return replacer.replace(str);
+    }
+
+    private List<Field> getAllFields(Class<?> clazz, List<Field> list) {
+        list.addAll(Arrays.asList(clazz.getDeclaredFields()));
+
+        Class<?> superclass = clazz.getSuperclass();
+        if (superclass != null && superclass != Object.class) {
+            list = getAllFields(superclass, list);
+        }
+
+        return list;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import pl.mrugames.social.i18n.model.InheritanceModel;
 import pl.mrugames.social.i18n.model.ModelToTranslate;
 import pl.mrugames.social.i18n.model.NestedModelToTranslate;
 
@@ -22,7 +23,7 @@ public class I18nSpec {
     private I18nObjectTranslator translator;
 
     @Test
-    public void givenRouterReturnsStringPlaceholder_thenReplaceItWithTranslation() throws IllegalAccessException {
+    public void simpleStringTranslation() throws IllegalAccessException {
         String result = translator.translateString("${i18n.simple_string}");
 
         assertThat(result).isEqualTo("Prosty ciąg znaków");
@@ -50,6 +51,22 @@ public class I18nSpec {
         translator.translate(modelToTranslate);
 
         assertThat(modelToTranslate.getList().stream().map(NestedModelToTranslate::getValue).collect(Collectors.toList())).containsExactly("dwa", "dwa");
+    }
+
+    @Test
+    public void shouldTranslateFieldInInheritedClass() throws IllegalAccessException {
+        InheritanceModel inheritanceModel = new InheritanceModel();
+        translator.translate(inheritanceModel);
+
+        assertThat(inheritanceModel.getValue()).isEqualTo("dwa");
+    }
+
+    @Test
+    public void shouldTranslateSuperValue() throws IllegalAccessException {
+        InheritanceModel inheritanceModel = new InheritanceModel();
+        translator.translate(inheritanceModel);
+
+        assertThat(inheritanceModel.getSuperValue()).isEqualTo("raz");
     }
 
 }
