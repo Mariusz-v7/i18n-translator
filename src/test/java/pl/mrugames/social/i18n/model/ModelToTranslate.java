@@ -11,6 +11,7 @@ public class ModelToTranslate implements Translatable {
     private final String regularString = "regularString"; // fields without placeholders (${...}) may be final
     private final NestedModelToTranslate nestedModelToTranslate = new NestedModelToTranslate();
     private final List<NestedModelToTranslate> list = Arrays.asList(new NestedModelToTranslate(), new NestedModelToTranslate());
+    private final Object nullObj = null;
 
 
     public String getValue() {

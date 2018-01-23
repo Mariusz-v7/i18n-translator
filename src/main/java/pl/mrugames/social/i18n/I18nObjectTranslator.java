@@ -28,6 +28,9 @@ public class I18nObjectTranslator {
                 }
 
                 Object nestedValue = field.get(object);
+                if (nestedValue == null) {
+                    continue;
+                }
 
                 if (field.getType().isAssignableFrom(String.class)) {
                     String str = (String) nestedValue;
