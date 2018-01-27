@@ -12,6 +12,7 @@ public class ModelToTranslate implements Translatable {
     private final NestedModelToTranslate nestedModelToTranslate = new NestedModelToTranslate();
     private final List<NestedModelToTranslate> list = Arrays.asList(new NestedModelToTranslate(), new NestedModelToTranslate());
     private final Object nullObj = null;
+    private final Object nestedModelToTranslateAsObject = new NestedModelToTranslate();
 
 
     public String getValue() {
@@ -20,6 +21,10 @@ public class ModelToTranslate implements Translatable {
 
     public NestedModelToTranslate getNestedModelToTranslate() {
         return nestedModelToTranslate;
+    }
+
+    public Object getNestedModelToTranslateAsObject() {
+        return nestedModelToTranslateAsObject;
     }
 
     public List<NestedModelToTranslate> getList() {

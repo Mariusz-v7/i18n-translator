@@ -69,4 +69,12 @@ public class I18nSpec {
         assertThat(inheritanceModel.getSuperValue()).isEqualTo("raz");
     }
 
+    @Test
+    public void shouldTranslateFieldsDeclaredAsObjects() throws IllegalAccessException {
+        ModelToTranslate modelToTranslate = new ModelToTranslate();
+        translator.translate(modelToTranslate);
+        NestedModelToTranslate nested = (NestedModelToTranslate) modelToTranslate.getNestedModelToTranslateAsObject();
+        assertThat(nested.getValue()).isEqualTo("dwa");
+    }
+
 }

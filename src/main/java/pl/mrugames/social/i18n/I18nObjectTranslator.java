@@ -32,7 +32,7 @@ public class I18nObjectTranslator {
                     continue;
                 }
 
-                if (field.getType().isAssignableFrom(String.class)) {
+                if (nestedValue instanceof String) {
                     String str = (String) nestedValue;
                     String translated = replacer.replace(str);
 
@@ -43,7 +43,7 @@ public class I18nObjectTranslator {
                     if (!str.equals(translated)) {
                         field.set(object, translated);
                     }
-                } else if (Translatable.class.isAssignableFrom(field.getType())) {
+                } else if (nestedValue instanceof Translatable) {
                     translate(nestedValue);
                 } else if (nestedValue instanceof Collection) {
 
