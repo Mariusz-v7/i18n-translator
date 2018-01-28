@@ -7,9 +7,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import pl.mrugames.social.i18n.model.InheritanceModel;
-import pl.mrugames.social.i18n.model.ListOfStrings;
 import pl.mrugames.social.i18n.model.ModelToTranslate;
 import pl.mrugames.social.i18n.model.NestedModelToTranslate;
+import pl.mrugames.social.i18n.model.SetOfStrings;
 
 import java.util.stream.Collectors;
 
@@ -80,7 +80,7 @@ public class I18nSpec {
 
     @Test
     public void shouldTranslateCollectionOfStrings() throws IllegalAccessException {
-        ListOfStrings modelToTranslate = new ListOfStrings();
+        SetOfStrings modelToTranslate = new SetOfStrings();
         translator.translate(modelToTranslate);
         assertThat(modelToTranslate.getStrings()).containsExactly("raz", "dwa");
     }

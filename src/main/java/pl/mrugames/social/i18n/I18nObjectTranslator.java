@@ -4,10 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class I18nObjectTranslator {
@@ -76,7 +73,15 @@ public class I18nObjectTranslator {
     }
 
     private Collection createNewCollection(Field field, Collection oldOne, Object[] array) {
-        return Arrays.asList(array); // TODO: recognize different collections and return proper one
+        // TODO: recognize different collections and return proper one
+
+        if (oldOne instanceof List) {
+            return Arrays.asList(array);
+        } else if (oldOne instanceof Set) {
+            return new HashSet<>(Arrays.asList(array));
+        }
+
+        return Arrays.asList(array);
     }
 
     public String translateString(String str) {
