@@ -48,11 +48,24 @@ public class I18nObjectTranslator {
                 } else if (nestedValue instanceof Collection) {
 
                     Collection<?> collection = (Collection<?>) nestedValue;
-                    for (Object element : collection) {
+                    Object[] tmp = collection.toArray();
+
+                    for (int i = 0; i < tmp.length; ++i) {
+                        Object element = tmp[i];
+
                         if (element instanceof Translatable) {
                             translate(element);
                         }
+
+                        if (element instanceof String) {
+                            element = translateString((String) element);
+                        }
+
+                        tmp[i] = element;
                     }
+
+                    Collection newCollection = createNewCollection(field, collection, tmp);
+                    field.set(object, newCollection);
                 }
             } finally {
                 if (!accessible) {
@@ -60,6 +73,10 @@ public class I18nObjectTranslator {
                 }
             }
         }
+    }
+
+    private Collection createNewCollection(Field field, Collection oldOne, Object[] array) {
+        return Arrays.asList(array); // TODO: recognize different collections and return proper one
     }
 
     public String translateString(String str) {

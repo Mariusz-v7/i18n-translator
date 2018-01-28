@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import pl.mrugames.social.i18n.model.InheritanceModel;
+import pl.mrugames.social.i18n.model.ListOfStrings;
 import pl.mrugames.social.i18n.model.ModelToTranslate;
 import pl.mrugames.social.i18n.model.NestedModelToTranslate;
 
@@ -75,6 +76,13 @@ public class I18nSpec {
         translator.translate(modelToTranslate);
         NestedModelToTranslate nested = (NestedModelToTranslate) modelToTranslate.getNestedModelToTranslateAsObject();
         assertThat(nested.getValue()).isEqualTo("dwa");
+    }
+
+    @Test
+    public void shouldTranslateCollectionOfStrings() throws IllegalAccessException {
+        ListOfStrings modelToTranslate = new ListOfStrings();
+        translator.translate(modelToTranslate);
+        assertThat(modelToTranslate.getStrings()).containsExactly("raz", "dwa");
     }
 
 }
